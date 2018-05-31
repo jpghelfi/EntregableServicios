@@ -53,9 +53,9 @@ public class MainFragment extends Fragment {
             @Override
             public void finish(List<ObrasDTO> resultado) {
 
-                MainAdapter adapter = new MainAdapter(resultado);
-                adapter.notifyDataSetChanged();
+                MainAdapter adapter = new MainAdapter(getContext(), resultado);
                 recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         });
     }

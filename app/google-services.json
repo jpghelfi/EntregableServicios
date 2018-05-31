@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "425100129781",
+    "firebase_url": "https://entregableservicios.firebaseio.com",
+    "project_id": "entregableservicios",
+    "storage_bucket": "entregableservicios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425100129781:android:437da88d829e3d88",
+        "android_client_info": {
+          "package_name": "com.example.juanpabloghelfi.entregableservicios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425100129781-0ui7vptkht5mc2re78to2qdnvgkvp4me.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.juanpabloghelfi.entregableservicios",
+            "certificate_hash": "6fe3c319d5c9b35240ace33ab0d39700a82f3381"
+          }
+        },
+        {
+          "client_id": "425100129781-r1bdb2jfdvv8pp9jne2apmarbhg720tc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "425100129781-r1bdb2jfdvv8pp9jne2apmarbhg720tc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxqV-QKaoGa_-1O8oGy2vYkF6_ysFYEQI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425100129781-r1bdb2jfdvv8pp9jne2apmarbhg720tc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

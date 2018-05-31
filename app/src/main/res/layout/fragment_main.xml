@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.juanpabloghelfi.entregableservicios.view.fragment.MainFragment">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerMain"
         android:layout_marginTop="40dp"

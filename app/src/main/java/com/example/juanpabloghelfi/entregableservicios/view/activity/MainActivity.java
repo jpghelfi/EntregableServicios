@@ -2,17 +2,34 @@ package com.example.juanpabloghelfi.entregableservicios.view.activity;
 
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.example.juanpabloghelfi.entregableservicios.R;
+import com.example.juanpabloghelfi.entregableservicios.dao.ObrasDAO;
 import com.example.juanpabloghelfi.entregableservicios.dto.ObrasDTO;
 import com.example.juanpabloghelfi.entregableservicios.view.fragment.MainFragment;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.util.List;
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity {
 
-
+    DrawerLayout drawerLayout;
 
 
     @Override
@@ -20,9 +37,57 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        drawerLayout = findViewById(R.id.drawerLayout);
         getFragmentManager().beginTransaction().replace(R.id.mainFragment, new MainFragment()).commit();
 
+        ObrasDAO obrasDAO = new ObrasDAO();
+        try {
+            obrasDAO.getJson();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        NavigationView navigationView = findViewById(R.id.menu);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                        menuItem.setChecked(true);
+                        if(menuItem.getItemId() == R.id.login){
+                            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                            startActivity(intent);
+
+                        }else if(menuItem.getItemId() == R.id.home){
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
+                        }
+
+                        drawerLayout.closeDrawers();
+
+                        return true;
+                    }
+                });
+
     }
+
+//    private class NavigationViewListener implements NavigationView.OnNavigationItemSelectedListener{
+//
+//        @Override
+//        public boolean onNavigationItemSelected(MenuItem item) {
+//
+//            if(item.getItemId() == 0){
+//                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                startActivity(intent);
+//            }
+//            else if(item.getItemId() == 1){
+//                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+//                startActivity(intent);
+//            }
+//            drawerLayout.closeDrawers();
+//            return true;
+//        }
+//    }
 
 
 }
