@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
 import com.example.juanpabloghelfi.entregableservicios.R;
+import com.example.juanpabloghelfi.entregableservicios.ResultListener;
 import com.example.juanpabloghelfi.entregableservicios.controller.ObrasController;
 import com.example.juanpabloghelfi.entregableservicios.dto.ObrasDTO;
 
@@ -47,16 +49,19 @@ public class MainAdapter extends RecyclerView.Adapter{
     private class ObrasViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imageView;
+        private TextView textView;
 
         public ObrasViewHolder(View itemView) {
             super(itemView);
-            this.imageView = itemView.findViewById(R.id.image_view_id);
+            imageView = itemView.findViewById(R.id.image_view_id);
+            textView= itemView.findViewById(R.id.nombre_pintura);
         }
 
         public void setImageView(ObrasDTO obra){
             Glide.with(context)
                     .load(obra.getImage())
                     .into(imageView);
+            textView.setText(obra.getName());
         }
     }
 

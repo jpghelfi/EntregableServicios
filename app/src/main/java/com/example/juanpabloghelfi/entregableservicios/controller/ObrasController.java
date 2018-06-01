@@ -13,14 +13,26 @@ import java.util.List;
 public class ObrasController {
 
 
+//    public void getObras(final ResultListener<List<ObrasDTO>> escuchador){
+//
+//        ObrasDAO obrasDAO = new ObrasDAO();
+//        obrasDAO.getObras(new ResultListener<List<ObrasDTO>>() {
+//            @Override
+//            public void finish(List<ObrasDTO> resultado) {
+//                escuchador.finish(resultado);
+//            }
+//        });
+//    }
     public void getObras(final ResultListener<List<ObrasDTO>> escuchador){
 
         ObrasDAO obrasDAO = new ObrasDAO();
-        obrasDAO.getObras(new ResultListener<List<ObrasDTO>>() {
+        obrasDAO.getJson(new ResultListener<List<ObrasDTO>>() {
             @Override
             public void finish(List<ObrasDTO> resultado) {
                 escuchador.finish(resultado);
             }
         });
+
+
     }
 }

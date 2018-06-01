@@ -10,6 +10,10 @@ public class ObrasDTO {
     private String name;
     private String artistId;
 
+    public ObrasDTO(){
+
+    }
+
     public ObrasDTO(String image, String name, String artistId) {
         this.image = image;
         this.name = name;

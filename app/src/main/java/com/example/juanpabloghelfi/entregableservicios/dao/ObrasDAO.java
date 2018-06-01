@@ -20,6 +20,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -75,9 +76,6 @@ public class ObrasDAO {
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
-                        
-
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -88,22 +86,27 @@ public class ObrasDAO {
         });
     }
 
-    public void getJson() throws IOException {
-        File localFile = File.createTempFile("artists", "json");
-        mStorageRef.getFile(localFile)
-                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+    public void getJson(final ResultListener<List<ObrasDTO>> escuchador) {
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("paints");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            List<ObrasDTO> obrasDTOList = new ArrayList<>();
             @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle failed download
-                // ...
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    ObrasDTO obra = snapshot.getValue(ObrasDTO.class);
+                    obrasDTOList.add(obra);
+                }
+                escuchador.finish(obrasDTOList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
     }
-
-
 }

@@ -42,17 +42,17 @@ public class MainFragment extends Fragment {
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
 
-        this.loadObras();
+        this.getData();
 
         return view;
     }
 
-    private void loadObras() {
+    public void getData(){
+
         ObrasController obrasController = new ObrasController();
         obrasController.getObras(new ResultListener<List<ObrasDTO>>() {
             @Override
             public void finish(List<ObrasDTO> resultado) {
-
                 MainAdapter adapter = new MainAdapter(getContext(), resultado);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -64,6 +64,5 @@ public class MainFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
     }
-
 
 }

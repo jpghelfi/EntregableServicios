@@ -40,12 +40,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         getFragmentManager().beginTransaction().replace(R.id.mainFragment, new MainFragment()).commit();
 
-        ObrasDAO obrasDAO = new ObrasDAO();
-        try {
-            obrasDAO.getJson();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         NavigationView navigationView = findViewById(R.id.menu);
         navigationView.setNavigationItemSelectedListener(
@@ -70,24 +64,5 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
-//    private class NavigationViewListener implements NavigationView.OnNavigationItemSelectedListener{
-//
-//        @Override
-//        public boolean onNavigationItemSelected(MenuItem item) {
-//
-//            if(item.getItemId() == 0){
-//                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-//                startActivity(intent);
-//            }
-//            else if(item.getItemId() == 1){
-//                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-//                startActivity(intent);
-//            }
-//            drawerLayout.closeDrawers();
-//            return true;
-//        }
-//    }
-
 
 }
