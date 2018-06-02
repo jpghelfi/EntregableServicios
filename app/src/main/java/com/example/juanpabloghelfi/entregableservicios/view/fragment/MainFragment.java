@@ -53,7 +53,7 @@ public class MainFragment extends Fragment {
         obrasController.getObras(new ResultListener<List<ObrasDTO>>() {
             @Override
             public void finish(List<ObrasDTO> resultado) {
-                MainAdapter adapter = new MainAdapter(getContext(), resultado);
+                MainAdapter adapter = new MainAdapter(resultado);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

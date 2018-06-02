@@ -89,7 +89,7 @@ public class ObrasDAO {
     public void getJson(final ResultListener<List<ObrasDTO>> escuchador) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference().child("paints");
+        final DatabaseReference myRef = database.getReference().child("dbPaints").child("paints");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             List<ObrasDTO> obrasDTOList = new ArrayList<>();
             @Override

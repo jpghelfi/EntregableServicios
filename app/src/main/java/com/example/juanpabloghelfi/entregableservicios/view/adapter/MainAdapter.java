@@ -16,6 +16,11 @@ import com.example.juanpabloghelfi.entregableservicios.ResultListener;
 import com.example.juanpabloghelfi.entregableservicios.controller.ObrasController;
 import com.example.juanpabloghelfi.entregableservicios.dto.ObrasDTO;
 
+import com.example.juanpabloghelfi.entregableservicios.view.GlideApp;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.List;
 
 /**
@@ -27,13 +32,14 @@ public class MainAdapter extends RecyclerView.Adapter{
     private List<ObrasDTO> obrasDTO;
     private Context context;
 
-    public MainAdapter(Context context, List<ObrasDTO> obrasDTO) {
+    public MainAdapter(List<ObrasDTO> obrasDTO) {
         this.obrasDTO = obrasDTO;
-        this.context = context;
+
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recylcer_cell, parent, false);
         ObrasViewHolder obrasViewHolder = new ObrasViewHolder(view);
         return obrasViewHolder;
@@ -54,13 +60,19 @@ public class MainAdapter extends RecyclerView.Adapter{
         public ObrasViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view_id);
-            textView= itemView.findViewById(R.id.nombre_pintura);
+            textView = itemView.findViewById(R.id.nombre_pintura);
         }
 
         public void setImageView(ObrasDTO obra){
-            Glide.with(context)
-                    .load(obra.getImage())
+
+            Glide.with(context).using(new FirebaseImageLoader())
+                    .load(FirebaseStorage.getInstance().getReference().child(obra.getImage()))
                     .into(imageView);
+
+//            GlideApp.with(context).load(FirebaseStorage.getInstance().getReference().child(obra.getImage()))
+                    
+
+
             textView.setText(obra.getName());
         }
     }
