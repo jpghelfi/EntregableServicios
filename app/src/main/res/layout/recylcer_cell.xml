@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         android:id="@+id/image_view_id" />
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +20,20 @@
         android:gravity="center"
         android:textSize="25dp"
         android:id="@+id/nombre_pintura"
+        android:textColor="@color/white"
+        android:background="@color/black_alpha"
+        android:alpha="20"
         android:layout_alignBottom="@+id/image_view_id"
         />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="material_loader.json"
+        app:lottie_cacheStrategy="strong"
+        android:visibility="gone"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
 
 </RelativeLayout>

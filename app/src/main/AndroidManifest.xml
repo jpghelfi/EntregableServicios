@@ -42,6 +42,10 @@
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activity.DetalleActivity"
+            android:label="@string/title_activity_detalle"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

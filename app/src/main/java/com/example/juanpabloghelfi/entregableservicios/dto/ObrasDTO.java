@@ -1,14 +1,17 @@
 package com.example.juanpabloghelfi.entregableservicios.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by juanpabloghelfi on 235//18.
  */
 
-public class ObrasDTO {
+public class ObrasDTO implements Serializable{
 
     private String image;
     private String name;
     private String artistId;
+    private ArtistaDTO artista;
 
     public ObrasDTO(){
 
@@ -18,6 +21,14 @@ public class ObrasDTO {
         this.image = image;
         this.name = name;
         this.artistId = artistId;
+    }
+
+    public ArtistaDTO getArtista() {
+        return artista;
+    }
+
+    public void setArtista(ArtistaDTO artista) {
+        this.artista = artista;
     }
 
     public String getImage() {

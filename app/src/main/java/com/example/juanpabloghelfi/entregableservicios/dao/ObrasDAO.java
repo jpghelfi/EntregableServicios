@@ -3,6 +3,7 @@ package com.example.juanpabloghelfi.entregableservicios.dao;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.juanpabloghelfi.entregableservicios.dto.ArtistaDTO;
 import com.example.juanpabloghelfi.entregableservicios.dto.ContenedorObras;
 import com.example.juanpabloghelfi.entregableservicios.ResultListener;
 import com.example.juanpabloghelfi.entregableservicios.ServiceObras;
@@ -86,7 +87,7 @@ public class ObrasDAO {
         });
     }
 
-    public void getJson(final ResultListener<List<ObrasDTO>> escuchador) {
+    public void getObrasDB(final ResultListener<List<ObrasDTO>> escuchador) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference().child("dbPaints").child("paints");
@@ -101,12 +102,36 @@ public class ObrasDAO {
                 }
                 escuchador.finish(obrasDTOList);
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public void getArtistasDB( final ResultListener<List<ArtistaDTO>> escuchador){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("dbArtistas").child("artists");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            List<ArtistaDTO> artistaDTOList = new ArrayList<>();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    ArtistaDTO artista = snapshot.getValue(ArtistaDTO.class);
+                    artistaDTOList.add(artista);
+                }
+                escuchador.finish(artistaDTOList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 }

@@ -28,6 +28,8 @@ public class MainFragment extends Fragment {
 
     RecyclerView recyclerView;
 
+    Result result;
+
 
     public MainFragment() {
 
@@ -53,7 +55,12 @@ public class MainFragment extends Fragment {
         obrasController.getObras(new ResultListener<List<ObrasDTO>>() {
             @Override
             public void finish(List<ObrasDTO> resultado) {
-                MainAdapter adapter = new MainAdapter(resultado);
+                MainAdapter adapter = new MainAdapter(resultado, new ResultListener<ObrasDTO>() {
+                    @Override
+                    public void finish(ObrasDTO resultado) {
+                        result.result(resultado);
+                    }
+                });
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -63,6 +70,11 @@ public class MainFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.result = (Result) context;
+    }
+
+    public interface Result{
+        public void result(ObrasDTO obrasDTO);
     }
 
 }
