@@ -3,15 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_alpha"
     tools:context=".view.fragment.DetalleFragment">
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/nombre_obra"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:padding="10dp"
         android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/rounded_corner"
         android:text="nombre obra" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/nombre_artista"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/rounded_corner"
+        android:layout_below="@+id/nombre_obra"
+        android:text="nombre artista" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombre_artista">
+
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_height="wrap_content"
+            android:id="@+id/image_id" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_fileName="material_loader.json"
+            android:layout_centerInParent="true"
+            app:lottie_cacheStrategy="strong"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
+
+    </RelativeLayout>
 
 
 

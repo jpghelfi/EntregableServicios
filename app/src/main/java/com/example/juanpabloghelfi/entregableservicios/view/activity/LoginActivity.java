@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import android.view.View;
+import android.app.Fragment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.juanpabloghelfi.entregableservicios.R;
 
+import com.example.juanpabloghelfi.entregableservicios.dto.FirebaseUserSerializable;
+import com.example.juanpabloghelfi.entregableservicios.view.fragment.LoginFragment;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -48,19 +51,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
-//        this.createUser("jp", "s");
+//        getFragmentManager().beginTransaction().replace(R.id.mainFragment, new LoginFragment()).commit();
 
+        mAuth = FirebaseAuth.getInstance();
         callbackManager = CallbackManager.Factory.create();
 
         fbLoginButton = (LoginButton) findViewById(R.id.login_button);
         fbLoginButton.setReadPermissions("email");
+//        fbLoginButton.setFragment(this);
 
         this.inputEmail = findViewById(R.id.input_username);
         this.inputPassword = findViewById(R.id.input_password);
         this.loginButton = findViewById(R.id.login_button_firebase);
         this.createButton = findViewById(R.id.create_button);
-//        this.logout = findViewById(R.id.logout);
 
         registerFacebook();
 
@@ -115,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+//                            updateUI(user);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
@@ -135,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+//                            updateUI(user);
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
@@ -168,11 +171,19 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        FirebaseUserSerializable currentUser = (FirebaseUserSerializable) mAuth.getCurrentUser();
+        if (currentUser != null){
+            updateUI(currentUser);
+        }
     }
 
-    private void updateUI(FirebaseUser currentUser) {
+    private void updateUI(FirebaseUserSerializable currentUser) {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("USER", currentUser);
+        intent.putExtras(bundle);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -187,10 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("firebaseyFB", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            //updateUI(user);
+//                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("firebaseyFB", "signInWithCredential:failure", task.getException());

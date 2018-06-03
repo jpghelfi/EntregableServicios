@@ -39,12 +39,13 @@ public class MainAdapter extends RecyclerView.Adapter{
 
     private List<ObrasDTO> obrasDTO;
     private Context context;
-    private LottieAnimationView lottieAnimationView;
+//    private LottieAnimationView lottieAnimationView;
     private ResultListener<ObrasDTO> resultListener;
 
     public MainAdapter(List<ObrasDTO> obrasDTO, ResultListener<ObrasDTO> result) {
         this.obrasDTO = obrasDTO;
         this.resultListener = result;
+
     }
 
     @Override
@@ -72,7 +73,8 @@ public class MainAdapter extends RecyclerView.Adapter{
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view_id);
             textView = itemView.findViewById(R.id.nombre_pintura);
-            lottieAnimationView = itemView.findViewById(R.id.lottie_placeholder);
+//            lottieAnimationView = itemView.findViewById(R.id.lottie_placeholder);
+//            lottieAnimationView.playAnimation();
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,30 +85,21 @@ public class MainAdapter extends RecyclerView.Adapter{
 
         public void setImageView(ObrasDTO obra){
 
-            lottieAnimationView.setVisibility(View.VISIBLE);
             Glide.with(context).using(new FirebaseImageLoader())
                     .load(FirebaseStorage.getInstance().getReference().child(obra.getImage()))
                     .listener(new RequestListener<StorageReference, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, StorageReference model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            if (lottieAnimationView != null) {
-                                lottieAnimationView.setVisibility(View.GONE);
-                            }
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, StorageReference model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            lottieAnimationView.setVisibility(View.GONE);
-
+//                            lottieAnimationView.setVisibility(View.GONE);
                             return false;
                         }
                     })
                     .into(imageView);
-
-//            GlideApp.with(context).load(FirebaseStorage.getInstance().getReference().child(obra.getImage()))
-
-
 
             textView.setText(obra.getName());
         }

@@ -19,9 +19,12 @@ import android.widget.Toast;
 import com.example.juanpabloghelfi.entregableservicios.R;
 import com.example.juanpabloghelfi.entregableservicios.ResultListener;
 import com.example.juanpabloghelfi.entregableservicios.dao.ObrasDAO;
+import com.example.juanpabloghelfi.entregableservicios.dto.FirebaseUserSerializable;
 import com.example.juanpabloghelfi.entregableservicios.dto.ObrasDTO;
 import com.example.juanpabloghelfi.entregableservicios.view.fragment.DetalleFragment;
 import com.example.juanpabloghelfi.entregableservicios.view.fragment.MainFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -39,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Resu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+
+
+        }
 
         drawerLayout = findViewById(R.id.drawerLayout);
         getFragmentManager().beginTransaction().replace(R.id.mainFragment, new MainFragment()).commit();

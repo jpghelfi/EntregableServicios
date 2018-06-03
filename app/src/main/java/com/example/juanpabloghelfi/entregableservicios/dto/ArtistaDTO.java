@@ -1,6 +1,8 @@
 package com.example.juanpabloghelfi.entregableservicios.dto;
 
-public class ArtistaDTO {
+import java.io.Serializable;
+
+public class ArtistaDTO implements Serializable{
 
     private String artistId;
     private String nationality;
@@ -10,6 +12,13 @@ public class ArtistaDTO {
 
     public ArtistaDTO() {
 
+    }
+
+    public ArtistaDTO(String artistId, String nationality, String name, String influence_by) {
+        this.artistId = artistId;
+        this.nationality = nationality;
+        this.name = name;
+        Influence_by = influence_by;
     }
 
     public String getArtistId() {

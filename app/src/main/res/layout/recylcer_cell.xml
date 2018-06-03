@@ -26,14 +26,6 @@
         android:layout_alignBottom="@+id/image_view_id"
         />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:lottie_fileName="material_loader.json"
-        app:lottie_cacheStrategy="strong"
-        android:visibility="gone"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true" />
+
 
 </RelativeLayout>
